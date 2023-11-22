@@ -1,0 +1,41 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--lwc-fontFamilyHeader);
+}
+
+.siteforceThemeLayoutStarter {
+  /* Ensure base font size is accessible (default was too small) */
+  font-size: 1rem;
+}
+
+@media (min-width: 1000px) {
+  /* Add more white space to table cells */
+  th:not(#foo),
+  td:not(#foo) {
+    padding: 1.25em 1.5em;
+  }
+
+  /* Make sure text directly inside of tabs has white space */
+  .uiTab.active {
+    padding: 1.25em 1.5em;
+  }
+  /* Except iframe tabs */
+  .uiTab.active:has(iframe) {
+    padding: 0;
+  }
+
+  /* Make sure table text is flush with other text in tab */
+  .uiTab.active table {
+    margin-left: -1.5em;
+    margin-right: -1.5em;
+  }
+}
+
+.forceCommunityRecordListStandard .listTitle {
+  /* Prefer to avoid uppercase transforms, has dyslexia and other accessibility implications */
+  text-transform: none;
+}
