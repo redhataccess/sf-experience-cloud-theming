@@ -1,8 +1,8 @@
-<link rel="stylesheet" media="all" href="https://static.redhat.com/libs/redhat/redhat-font/3/webfonts/red-hat-font.css" />
 <style>
-  /* Custom CSS doesn't allow CSS Custom props */
-  body {
-    --lwc-fontFamily: "Red Hat Text",RedHatText,Arial,sans-serif;
-    --lwc-fontFamilyHeader: "Red Hat Display","RedHatDisplay","Overpass",Overpass,Arial,sans-serif;
-  }
+	/* Custom CSS doesn't allow CSS Custom props, this method isn't in SF best practice, but with how the theme is currently written, this is a great way to setup the font */
+    body {
+      --lwc-fontFamily: RedHatText, 'Red Hat Text', Arial,sans-serif;
+      --lwc-fontFamilyHeader: RedHatDisplay, 'Red Hat Display', Arial,sans-serif;
+      --lwc-fontFamilyStrong: RedHatDisplay, 'Red Hat Display', Arial,sans-serif;
+    }
 </style>

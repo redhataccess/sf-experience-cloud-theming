@@ -1,3 +1,41 @@
+/**
+ * @note Scoping page content styles in [role="main"] and main so they don't style nav/footer
+ * @note The [class] selector is to increase specificity when selector is appropriate
+ * @note The :not(#foo) selector adds specificity of an id without needing an ID in the DOM, to avoid !important
+ */
+
+/* @font-face {
+  font-family: RedHatDisplay;
+  src: url(https://redhatcrm--feedback--c.sandbox.vf.force.com/resource/1700676638000/RedHatFont_Title?/resource/1700676638000/RedHatFont_Title) format("woff2-variations");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: fallback
+}
+
+@font-face {
+  font-family: RedHatDisplay;
+  src: url(https://redhatcrm--feedback--c.sandbox.vf.force.com/resource/1700676638000/RedHatFont_Title?/resource/1700677778000/RedHatFont_Title_Italic) format("woff2-variations");
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: fallback
+}
+
+@font-face {
+  font-family: RedHatText;
+  src: url(https://redhatcrm--feedback--c.sandbox.vf.force.com/resource/1700676638000/RedHatFont_Title?/resource/1700676602000/RedHatFont_Text) format("woff2-variations");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: fallback
+}
+
+@font-face {
+  font-family: RedHatText;
+  src: url(https://redhatcrm--feedback--c.sandbox.vf.force.com/resource/1700676638000/RedHatFont_Title?/resource/1700677449000/RedHatFont_Text_Italic) format("woff2-variations");
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: fallback
+} */
+
 h1,
 h2,
 h3,
@@ -7,35 +45,178 @@ h6 {
   font-family: var(--lwc-fontFamilyHeader);
 }
 
-.siteforceThemeLayoutStarter {
+[role="main"] h1:not(#foo),
+[role="main"] h2:not(#foo),
+[role="main"] h3:not(#foo),
+[role="main"] h4:not(#foo),
+[role="main"] h5:not(#foo),
+[role="main"] h6:not(#foo),
+main h1:not(#foo),
+main h2:not(#foo),
+main h3:not(#foo),
+main h4:not(#foo),
+main h5:not(#foo),
+main h6:not(#foo) {
+  /* Avoid uppercase transformations, which are bad for dislexia and other a11y reasons */
+  text-transform: none;
+}
+
+[role="main"]:not(#foo),
+main:not(#foo) {
   /* Ensure base font size is accessible (default was too small) */
   font-size: 1rem;
 }
 
+/**
+ * Table styling
+ */
+[role="main"] tbody tr:nth-child(2n + 1),
+main tbody tr:nth-child(2n + 1) {
+  /* Zebra striping on rows */
+  background: rgb(250, 250, 250);
+}
+
 @media (min-width: 1000px) {
   /* Add more white space to table cells */
-  th:not(#foo),
-  td:not(#foo) {
+  [role="main"] th:not(#foo),
+  [role="main"] td:not(#foo),
+  main th:not(#foo),
+  main td:not(#foo) {
     padding: 1.25em 1.5em;
-  }
-
-  /* Make sure text directly inside of tabs has white space */
-  .uiTab.active {
-    padding: 1.25em 1.5em;
-  }
-  /* Except iframe tabs */
-  .uiTab.active:has(iframe) {
-    padding: 0;
-  }
-
-  /* Make sure table text is flush with other text in tab */
-  .uiTab.active table {
-    margin-left: -1.5em;
-    margin-right: -1.5em;
   }
 }
 
-.forceCommunityRecordListStandard .listTitle {
-  /* Prefer to avoid uppercase transforms, has dyslexia and other accessibility implications */
-  text-transform: none;
+/**
+ * Nav styles
+ */
+@media only screen and (min-width: 48em) {
+  .forceCommunityThemeNav.navMenuType-expanded .mainNavItem .linkBtn.comm-navigation__top-level-item-link--active {
+    border-bottom: 2px solid #e00;
+  }
+}
+
+/**
+ * Tabs styling
+ */
+@media (min-width: 1000px) {
+  /* Make sure text directly inside of tabs has white space from the edge*/
+  [role="main"] .uiTab.active,
+  main .uiTab.active {
+    padding: 1.25em 1.5em;
+  }
+  /* Except iframe tabs */
+  [role="main"] .uiTab.active:has(iframe),
+  main .uiTab.active:has(iframe) {
+    padding: 0;
+  }
+}
+
+[role="main"] .tabs__item[class],
+main .tabs__item[class] {
+  /* Increase font size for readability and hit area */
+  font-size: 1rem;
+}
+
+[role="main"] .uiTabBar .uiTabItem .tabHeader[class][class],
+main .uiTabBar .uiTabItem .tabHeader[class][class] {
+  /* Enforce RH tab button spacing */
+  padding: 0.5em 1em;
+}
+
+[role="main"] .tabs__item[class][class][class],
+main .tabs__item[class][class][class] {
+  /* With added padding, don't add margin between tabs */
+  margin: 0;
+}
+
+[role="main"] .tabs__item.active[class][class] > a,
+main .tabs__item.active[class][class] > a {
+  /* Force normal weight font in tabs */
+  font-weight: 400;
+}
+
+[role="main"] .tabs__item.active[class][class] > a,
+main .tabs__item.active[class][class] > a {
+  /* Set active tab text color to primary text color */
+  color: #151515;
+  /* Set tab active color to red */
+  border-color: #e00;
+}
+
+[role="main"] .tabs__item[class][class] > a:focus,
+main .tabs__item[class][class] > a:focus {
+  box-shadow: 0 0 3px 1px #0066cc55;
+}
+
+
+/**
+ * RH Button styles
+ */
+[role="main"] button.slds-button,
+main button.slds-button {
+  border: 0;
+  font-family: inherit;
+  font-size: inherit;
+  appearance: none;
+}
+
+/* Default button style */
+[role="main"] .slds-button[class][class]
+main .slds-button[class][class] {
+  margin-inline-end: 1em;
+  margin-block-end: 1em;
+  padding: 0.375em 1em;
+  border: 0;
+  /* Using box-shadow for the border to avoid layout issues */
+  box-shadow: inset 0 0 0 1px #06c;
+  font-weight: normal;
+  color: #06c;
+  background: #fff;
+}
+[role="main"] .slds-button[class][class]:hover,
+[role="main"] .slds-button[class][class]:focus,
+main .slds-button[class][class]:hover,
+main .slds-button[class][class]:focus {
+  box-shadow:
+    inset 0 0 0 1px #06c,
+    0 0 0 1px #06c;
+}
+
+/* Primary/Loud button style */
+/* @todo Simple Deal Registration uses neutral button when it should be  */
+[role="main"] .slds-button--brand[class][class][class],
+main .slds-button--brand[class][class][class],
+/* @note found an example of the class with an _ instead of -- on /bpp/s/deal-registration */
+[role="main"] .slds-button_brand[class][class][class],
+main .slds-button_brand[class][class][class] {
+  border-radius: 3px;
+  color: #fff;
+  background: #06c;
+  box-shadow: none;
+}
+[role="main"] .slds-button--brand[class][class]:hover,
+[role="main"] .slds-button--brand[class][class]:focus,
+main .slds-button--brand[class][class]:hover,
+main .slds-button--brand[class][class]:focus,
+[role="main"] .slds-button_brand[class][class]:hover,
+[role="main"] .slds-button_brand[class][class]:focus,
+main .slds-button_brand[class][class]:hover,
+main .slds-button_brand[class][class]:focus {
+  background: #004080;
+  box-shadow: none;
+}
+
+/* @todo need an example of a cancel button */
+
+/* Styles for buttons that shouldn't look like buttons, e.g. "Share an update..." */
+[role="main"] .slds-button--neutral[class][class][class],
+main .slds-button--neutral[class][class][class] {
+  border-radius: 0;
+  /* Bottom should be darker gray and the other 3 sides lighter */
+  /* Using box-shaodw for the border to avoid layout issues */
+  box-shadow:
+    inset 0 -1px 0 0 #8a8d90,
+    inset 0 0 0 1px #f0f0f0;
+  background: #fff;
+  color: #151515;
 }
