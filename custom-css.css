@@ -99,6 +99,7 @@ main tbody tr:nth-child(2n + 1) {
  * Tabs styling
  */
 @media (min-width: 1000px) {
+  /* @todo Is this necessary? How often does text go directly into a tab pane? */
   /* Make sure text directly inside of tabs has white space from the edge*/
   [role="main"] .uiTab.active,
   main .uiTab.active {
