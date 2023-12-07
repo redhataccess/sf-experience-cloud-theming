@@ -4,38 +4,6 @@
  * @note The :not(#foo) selector adds specificity of an id without needing an ID in the DOM, to avoid !important
  */
 
-/* @font-face {
-  font-family: RedHatDisplay;
-  src: url(https://redhatcrm--feedback--c.sandbox.vf.force.com/resource/1700676638000/RedHatFont_Title?/resource/1700676638000/RedHatFont_Title) format("woff2-variations");
-  font-weight: 300 900;
-  font-style: normal;
-  font-display: fallback
-}
-
-@font-face {
-  font-family: RedHatDisplay;
-  src: url(https://redhatcrm--feedback--c.sandbox.vf.force.com/resource/1700676638000/RedHatFont_Title?/resource/1700677778000/RedHatFont_Title_Italic) format("woff2-variations");
-  font-weight: 300 900;
-  font-style: italic;
-  font-display: fallback
-}
-
-@font-face {
-  font-family: RedHatText;
-  src: url(https://redhatcrm--feedback--c.sandbox.vf.force.com/resource/1700676638000/RedHatFont_Title?/resource/1700676602000/RedHatFont_Text) format("woff2-variations");
-  font-weight: 300 900;
-  font-style: normal;
-  font-display: fallback
-}
-
-@font-face {
-  font-family: RedHatText;
-  src: url(https://redhatcrm--feedback--c.sandbox.vf.force.com/resource/1700676638000/RedHatFont_Title?/resource/1700677449000/RedHatFont_Text_Italic) format("woff2-variations");
-  font-weight: 300 900;
-  font-style: italic;
-  font-display: fallback
-} */
-
 h1,
 h2,
 h3,
@@ -69,6 +37,7 @@ main:not(#foo) {
 
 /**
  * Table styling
+ * @note Styling thead is a very risky, sortable tables have a lot of JS and weird styles on the head
  */
 [role="main"] tbody tr:nth-child(2n + 1),
 main tbody tr:nth-child(2n + 1) {
@@ -78,11 +47,40 @@ main tbody tr:nth-child(2n + 1) {
 
 @media (min-width: 1000px) {
   /* Add more white space to table cells */
-  [role="main"] th:not(#foo),
-  [role="main"] td:not(#foo),
-  main th:not(#foo),
-  main td:not(#foo) {
+  [role="main"] tbody th:not(#foo),
+  [role="main"] tbody td:not(#foo),
+  main tbody th:not(#foo),
+  main tbody td:not(#foo) {
     padding: 1.25em 1.5em;
+  }
+
+  [role="main"] thead .toggle,
+  main thead .toggle {
+    height: auto;
+    padding-bottom: 0.5em;
+  }
+
+  /* For cells that have a checkbox, giving them padding breaks JS layout math from SF */
+  [role="main"] td.slds-cell-edit:not(#foo),
+  main td.slds-cell-edit:not(#foo),
+  /* Select all cell in header shouldn't have padding */
+  [role="main"] thead .selectionColumnHeader:not(#foo),
+  main thead .selectionColumnHeader:not(#foo),
+  /* Cells with buttons in theme shouldn't get padding, the padding should be on the button */
+  main thead th.sortable:not(#foo),
+  [role="main"] thead th.sortable:not(#foo) {
+    padding: 0;
+  }
+
+  /* Set table heading border colors, which are intended to be resize handles */
+  .slds-resizable__divider[class]:before {
+    background-color: #fafafa;
+  }
+
+  /* Remove top border from tables */
+  .slds-table_header-fixed_container[class]:before,
+  .slds-table--header-fixed_container[class]:before {
+    content: none;
   }
 }
 
@@ -104,12 +102,7 @@ main tbody tr:nth-child(2n + 1) {
   /* Make sure text directly inside of tabs has white space from the edge*/
   [role="main"] .uiTab.active,
   main .uiTab.active {
-    padding: 1.25em 1.5em;
-  }
-  /* Except iframe tabs */
-  [role="main"] .uiTab.active:has(iframe),
-  main .uiTab.active:has(iframe) {
-    padding: 0;
+    padding: 1.25em 0;
   }
 }
 
@@ -154,43 +147,28 @@ main .tabs__item[class][class] > a:focus {
 /**
  * RH Button styles
  */
+/* @note slds-button has broad usage, there doesn't seem to be a reliable button class */
 [role="main"] button.slds-button,
 main button.slds-button {
-  border: 0;
   font-family: inherit;
   font-size: inherit;
+  line-height: 1.4;
   appearance: none;
 }
 
-/* Default button style */
-[role="main"] .slds-button[class][class]
-main .slds-button[class][class] {
-  margin-inline-end: 1em;
-  margin-block-end: 1em;
-  padding: 0.375em 1em;
-  border: 0;
-  /* Using box-shadow for the border to avoid layout issues */
-  box-shadow: inset 0 0 0 1px #06c;
-  font-weight: normal;
-  color: #06c;
-  background: #fff;
-}
-[role="main"] .slds-button[class][class]:hover,
-[role="main"] .slds-button[class][class]:focus,
-main .slds-button[class][class]:hover,
-main .slds-button[class][class]:focus {
-  box-shadow:
-    inset 0 0 0 1px #06c,
-    0 0 0 1px #06c;
-}
-
 /* Primary/Loud button style */
-/* @todo Simple Deal Registration uses neutral button when it should be  */
 [role="main"] .slds-button--brand[class][class][class],
 main .slds-button--brand[class][class][class],
 /* @note found an example of the class with an _ instead of -- on /bpp/s/deal-registration */
 [role="main"] .slds-button_brand[class][class][class],
-main .slds-button_brand[class][class][class] {
+main .slds-button_brand[class][class][class],
+/* @note Fix for Simple Deal Registration uses the neutral slds class and the brand uiButton class */
+[role="main"] .slds-button.uiButton--brand[class][class][class],
+main .slds-button.uiButton--brand[class][class][class] {
+  margin-inline-end: 1em;
+  margin-block-end: 1em;
+  padding: 0.375em 1em;
+  border: 0;
   border-radius: 3px;
   color: #fff;
   background: #06c;
@@ -208,11 +186,10 @@ main .slds-button_brand[class][class]:focus {
   box-shadow: none;
 }
 
-/* @todo need an example of a cancel button */
-
 /* Styles for buttons that shouldn't look like buttons, e.g. "Share an update..." */
-[role="main"] .slds-button--neutral[class][class][class],
-main .slds-button--neutral[class][class][class] {
+[role="main"] .dummyButtonCallToAction[class][class][class],
+main .dummyButtonCallToAction[class][class][class] {
+  padding: 0.375em 1em;
   border-radius: 0;
   /* Bottom should be darker gray and the other 3 sides lighter */
   /* Using box-shaodw for the border to avoid layout issues */
@@ -221,4 +198,56 @@ main .slds-button--neutral[class][class][class] {
     inset 0 0 0 1px #f0f0f0;
   background: #fff;
   color: #151515;
+}
+
+/**
+ * Home page
+ */
+.forceCommunityFeedPublisher .dummyControlsContainer {
+  align-items: start;
+}
+
+/**
+ * Listing table pages
+ */
+.forceListViewManager .slds-page-header records-highlights-icon {
+  /* Remove dated looking icon */
+  display: none;
+}
+
+.forceListViewManager .slds-page-header .slds-breadcrumb span {
+  /* Make the page subject (Object name) look like an h1 */
+  display: inline-block;
+  font-size: 32px;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+/**
+ * Object page
+ * e.g. page that displays a single account, contact, or other objects
+ */
+.slds-page-header_record-home .slds-media {
+  /* Hide dated looking icon */
+  display: none;
+}
+
+.slds-page-header_record-home .slds-page-header__title {
+  font-size: 32px;
+  line-height: 1.4;
+}
+
+.slds-page-header_record-home .forceActionsContainer .slds-button {
+  /* Follow button has different height than other buttons, unsure why */
+  min-height: 2em;
+}
+
+.slds-page-header_record-home .actionsContainer[class][class] lightning-icon {
+  /* Fix the alignment of the arrow in the actions list in the top right corner */
+  /* Arrow appears when not all actions can fit on screen */
+  line-height: 0;
+}
+
+.forceCommunitySection .forcePageBlockSection {
+  margin: 0 0 2em;
 }

@@ -1,8 +1,37 @@
+<!-- Linking shared red hat font resource to load RH web fonts, static.redhat.com must be a trusted url for font and style srcs -->
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Red+Hat+Text:ital,wght@0,400;0,700;1,400;1,700&family=Varela+Round&display=swap" rel="stylesheet">
 <style>
-	/* Custom CSS doesn't allow CSS Custom props, this method isn't in SF best practice, but with how the theme is currently written, this is a great way to setup the font */
-    body {
-      --lwc-fontFamily: RedHatText, 'Red Hat Text', Arial,sans-serif;
-      --lwc-fontFamilyHeader: RedHatDisplay, 'Red Hat Display', Arial,sans-serif;
-      --lwc-fontFamilyStrong: RedHatDisplay, 'Red Hat Display', Arial,sans-serif;
-    }
+  /* Custom CSS doesn't allow CSS Custom props, this method isn't in SF best practice, but with how the theme is currently written, this is a great way to setup the font */
+  body {
+    --lwc-fontFamily: RedHatText, 'Red Hat Text', Arial,sans-serif;
+    --lwc-fontFamilyHeader: RedHatDisplay, 'Red Hat Display', Arial,sans-serif;
+    --lwc-fontFamilyStrong: RedHatDisplay, 'Red Hat Display', Arial,sans-serif;
+  }
+
+  /**
+   * Accordion styles
+   * Added these to the head because the CSS validation in Custom CSS thinks the :has() selector is invalid
+   * Accordion markup doesn't have any good selectors, using what's there
+   * An element with aria-expanded and aria-controls attributes should be a reliable indicator of an accordion
+   */
+  /* Wrapper styles when open */
+  .forceCommunitySection .slds-section:has([aria-controls][aria-expanded="true"]) {
+    border-top: 1px solid #d2d2d2;
+    border-right: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+    /* Left border is a shadow so layout doesn't shift */
+    box-shadow: inset 2px 0 0 0 #06c;
+  }
+
+  .forceCommunitySection button[aria-controls][aria-expanded] {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  /* Content area styles */
+  .forceCommunitySection .slds-section:has([aria-controls][aria-expanded]) .slds-section__content {
+    padding: 1em 1.25em;
+  }
 </style>
