@@ -1,13 +1,6 @@
-<!-- Linking shared red hat font resource to load RH web fonts, static.redhat.com must be a trusted url for font and style srcs -->
+<!-- Linking shared red hat font resource to load RH web fonts, we've had our font updated a few times to fix issues, the Google Font is a reliable and updated source. -->
 <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Red+Hat+Text:ital,wght@0,400;0,700;1,400;1,700&family=Varela+Round&display=swap" rel="stylesheet">
 <style>
-  /* Custom CSS doesn't allow CSS Custom props, this method isn't in SF best practice, but with how the theme is currently written, this is a great way to setup the font */
-  body {
-    --lwc-fontFamily: RedHatText, 'Red Hat Text', Arial,sans-serif;
-    --lwc-fontFamilyHeader: RedHatDisplay, 'Red Hat Display', Arial,sans-serif;
-    --lwc-fontFamilyStrong: RedHatDisplay, 'Red Hat Display', Arial,sans-serif;
-  }
-
   /**
    * Accordion styles
    * Added these to the head because the CSS validation in Custom CSS thinks the :has() selector is invalid
