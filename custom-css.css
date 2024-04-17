@@ -1,4 +1,5 @@
 /**
+ * See https://github.com/redhataccess/sf-experience-cloud-theming
  * @note Scoping page content styles in [role="main"] and main so they don't style nav/footer
  * @note The [class] selector is to increase specificity when selector is appropriate
  * @note The :not(#foo) selector adds specificity of an id without needing an ID in the DOM, to avoid !important
@@ -233,6 +234,7 @@ main .dummyButtonCallToAction[class][class][class] {
 }
 
 .slds-page-header_record-home .slds-page-header__title {
+  /* Make the page's subject appear large, like an h1 */
   font-size: 32px;
   line-height: 1.4;
 }

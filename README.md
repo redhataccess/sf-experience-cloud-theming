@@ -140,7 +140,9 @@ If an graphics/photography are used, make sure it follows [the brand standards](
 There are a few instances where these styling coloring outside the lines of what Salesforce recommends. It's the original author's belief that we're doing so responsibly, and in a way that is very unlikely to cause problems.
 
 However, that may not pan out. The custom css and head include code are well commented, here are a few areas worth calling out:
-* @todo
+* Custom CSS can be risky, we have a fair amount. We're improving the readability by increasing the default font size, and ensuring the branding and even some components follow Red Hat's style. There should be comments explaining the intention of the styles in case they cause bugs in the future and may need to be adjusted or removed.
+* Including the brand font from Google Fonts instead of uploading it to SF. The font has been updated a few times due to bugs, the Google font stays updated. Since this involves linking to CSS file (not a script, so not a security issue) and it's a reliable service, and this relieves some effort on implementation and maintenance, this seems like a good approach. The font is included in the head include.
+* CSS in the head-include is due to "Custom CSS" in Experience Cloud using outdated validation rules for "Custom CSS". `:has()` is a valid CSS selector that it thinks is invalid, which prevents saving. The head include area doesn't validate CSS, so we're able to use it there, and it's required for the styling to work without causing an issue.
 
 
 ## Contributing
