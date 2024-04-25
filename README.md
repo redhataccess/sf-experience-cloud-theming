@@ -17,7 +17,7 @@ This project contains a few custom code snippets which may not age well as updat
 
 ## Setup
 ### Pre-requisites
-These settings are made for the **Aura framework**, using the **Jepson** Theme. It's possible that these settings and styles could be mapped to other types of Salesforce sites, but the custom CSS would likely need to be reworked for different class names.
+These settings are made for the **Aura framework**, using the **"Jepson"** Theme. I've been most successful getting this to work on the **"Help Center"** template when I create the Site in Salesforce. It's possible that these settings and styles could be mapped to other types of Salesforce sites, but the custom CSS would likely need to be reworked for different class names.
 
 All of these configuration and code updates are down in the UI in the "Builder" workspace on Experience cloud sites.<br>![Builder button](screenshots/Builder-button.png)
 
